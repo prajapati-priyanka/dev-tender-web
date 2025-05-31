@@ -8,7 +8,7 @@ export const Home = () => {
     <>
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 };
