@@ -23,8 +23,8 @@ export const Login = () => {
         },
         { withCredentials: true }
       );
-      // console.log("response", response);
-      dispatch(addUser(response.data));
+     
+      dispatch(addUser(response.data.data));
       naviagte("/");
     } catch (error) {
       console.error("Error Occurred: ", error.message);

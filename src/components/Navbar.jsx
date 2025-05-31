@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 export const Navbar = () => {
   const user = useSelector((state) => state.user);
+ 
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
@@ -9,7 +10,7 @@ export const Navbar = () => {
       </div>
       {user && (
         <div className="flex gap-3 mr-10 items-center">
-            <p>Welcome, {user.data.firstName}</p>
+            <p>Welcome, {user.firstName}</p>
 
           <div className="dropdown dropdown-end">
             <div
@@ -20,7 +21,7 @@ export const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src= {user.data.photoUrl}
+                  src= {user.photoUrl}
                 />
               </div>
             </div>
