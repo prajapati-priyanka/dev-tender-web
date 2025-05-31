@@ -6,8 +6,8 @@ import { useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 
 export const Login = () => {
-  const [email, setEmail] = useState("ankit@gmail.com");
-  const [password, setPassword] = useState("Ankit@123");
+  const [email, setEmail] = useState("shri@gmail.com");
+  const [password, setPassword] = useState("Shri@123");
   const dispatch = useDispatch();
   const naviagte = useNavigate();
 
@@ -23,8 +23,8 @@ export const Login = () => {
         },
         { withCredentials: true }
       );
-      // console.log("response", response);
-      dispatch(addUser(response.data));
+     
+      dispatch(addUser(response.data.data));
       naviagte("/");
     } catch (error) {
       console.error("Error Occurred: ", error.message);
