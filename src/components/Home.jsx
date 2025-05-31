@@ -17,14 +17,14 @@ export const Home = () => {
   const fetchUser = async () => {
     if (user) return;
     try {
-      const response = await axios.get("PROFILE_URL", {
+      const response = await axios.get(PROFILE_URL, {
         withCredentials: true,
       });
 
       if (response.status === 200) {
-        dispatch(addUser(response));
+        dispatch(addUser(response.data));
       }
-      dispatch(addUser(response.data));
+      // dispatch(addUser(response.data));
     } catch (error) {
       if (error.status === 401) {
         navigate("/login");
