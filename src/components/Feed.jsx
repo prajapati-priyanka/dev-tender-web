@@ -25,7 +25,9 @@ export const Feed = () => {
   useEffect(() => {
     getUsers();
   }, []);
-
+  
+  if(!feed) return;
+  if(feed.length === 0) return <h1>No USERS Found</h1>;
   return <>
   {feed && <UserCard user = {feed[0]} />}
   </>
