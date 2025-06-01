@@ -20,7 +20,7 @@ await axios.post(LOGOUT_URL, {}, {withCredentials:true})
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">👩‍💻 DevTinder</a>
+        <Link to="/" className="btn btn-ghost text-xl">👩‍💻 DevTinder</Link>
       </div>
       {user && (
         <div className="flex gap-3 mr-10 items-center">
