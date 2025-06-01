@@ -13,7 +13,7 @@ export const Requests = () => {
         "http://localhost:3000/user/requests/recieved",
         { withCredentials: true }
       );
-      console.log("CONNECTIONs REquest", response);
+    //   console.log("CONNECTIONs REquest", response);
       dispatch(addRequests(response.data.data));
     } catch (error) {
       console.error("Error Occurred: ", error.message);
@@ -24,8 +24,7 @@ export const Requests = () => {
     getRequests();
   }, []);
 
-  if (!requests) return;
-  if (requests.length === 0) <h1>There is no Connections</h1>;
+
   return (
     <>
       <ConnectionCard connection={requests} />
