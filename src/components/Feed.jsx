@@ -10,6 +10,7 @@ export const Feed = () => {
   const dispatch = useDispatch();
   const FEED_URL = BASE_URL + "user/feed";
 
+
   const getUsers = async () => {
     if(feed) return;
     try {
@@ -26,6 +27,6 @@ export const Feed = () => {
   }, []);
 
   return <>
-  {feed && <UserCard feed = {feed[0]} />}
+  {feed && <UserCard user = {feed[0]} />}
   </>
 };
