@@ -50,7 +50,7 @@ await axios.post(LOGOUT_URL, {}, {withCredentials:true})
                 </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connection">Connections</Link>
               </li>
               <li onClick={handleLogout}>
                 <a>Logout</a>
