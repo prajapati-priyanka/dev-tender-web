@@ -6,12 +6,16 @@ import { useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 
 export const Login = () => {
-  const [email, setEmail] = useState("ankit@gmail.com");
-  const [password, setPassword] = useState("Ankit@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [isLoginPage, setIsLoginPage] = useState(true);
   const dispatch = useDispatch();
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
-  const LOGIN_URL = BASE_URL + "login"
+  const LOGIN_URL = BASE_URL + "login";
+  const SIGNUP_URL = BASE_URL + "signup";
 
   const handleLogin = async () => {
     try {
@@ -23,20 +27,68 @@ export const Login = () => {
         },
         { withCredentials: true }
       );
-     
+
       dispatch(addUser(response.data.data));
-      naviagte("/");
+      navigate("/");
+    } catch (error) {
+      console.error("Error Occurred: ", error.message);
+    }
+  };
+
+  const handleSignUp = async () => {
+    // signup code will be return here
+    try {
+      const response = await axios.post(
+        SIGNUP_URL,
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+
+      dispatch(addUser(response.data.data));
+      navigate("/profile");
     } catch (error) {
       console.error("Error Occurred: ", error.message);
     }
   };
 
   return (
-    <div className="flex justify-center mt-28">
+    <div className="flex justify-center mt-8">
       <div className="card card-border bg-base-100 w-96 border-inherit">
         <div className="card-body">
-          <h2 className="card-title underline justify-center">Login</h2>
+          <h2 className="card-title underline justify-center">
+            {isLoginPage ? "Login" : "Signup"}
+          </h2>
           <div>
+            {!isLoginPage && (
+              <>
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">First Name</legend>
+                  <input
+                    type="text"
+                    value={firstName}
+                    className="input"
+                    placeholder="Type here"
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </fieldset>
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">last Name</legend>
+                  <input
+                    type="text"
+                    value={lastName}
+                    className="input"
+                    placeholder="Type here"
+                    onChange={(e) => setlastName(e.target.value)}
+                  />
+                </fieldset>
+              </>
+            )}
+
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Email</legend>
               <input
@@ -50,7 +102,7 @@ export const Login = () => {
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Password</legend>
               <input
-                type="text"
+                type="password"
                 value={password}
                 className="input"
                 placeholder="Type here"
@@ -59,9 +111,22 @@ export const Login = () => {
             </fieldset>
           </div>
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button
+              className="btn btn-primary"
+              onClick={isLoginPage ? handleLogin : handleSignUp}
+            >
+              {isLoginPage ? "Login" : "SignUp"}
             </button>
+          </div>
+          <div className="text-center">
+            <p
+              className="cursor-pointer"
+              onClick={() => setIsLoginPage((prevVal) => !prevVal)}
+            >
+              {isLoginPage
+                ? "New User? Signup Here"
+                : "Existing User? Login Here"}
+            </p>
           </div>
         </div>
       </div>
